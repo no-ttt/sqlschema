@@ -1,0 +1,70 @@
+import React, { Component } from "react"
+import { Link } from 'react-router-dom'
+import Overview from '../../containers/Tabs/ColumnValue/Overview'
+import Type from '../../containers/Tabs/ColumnValue/Type'
+import OverviewContent from '../../containers/Contents/ColumnValue/Overview'
+import TypeContent from '../../containers/Contents/ColumnValue/Type'
+import Drawer from '@mui/material/Drawer'
+import List from '@mui/material/List'
+import HomeIcon from '@mui/icons-material/Home'
+import SearchIcon from '@mui/icons-material/Search'
+
+export default class ColumnValue extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			tab: 0,
+			click: "",
+		}
+	}
+
+	_handleKeyDown = (e) => {
+		if (e.key === 'Enter') {
+		  alert(e.target.value);
+		}
+	}
+
+	setData = (tab, name) => {
+		this.setState({
+			tab: tab,
+			click: name
+		})
+	}
+
+	render() {
+		const { tab, click } = this.state
+		return (
+			<div>
+				<Drawer variant="permanent" open={true}>
+					<List className="drawer-list-width">
+						<div className="drawer-title-pos">
+							<div className="drawer-title">值的分布狀態</div>
+							<Link
+								to={{
+									pathname: '/',
+								}}
+								className="drawer-home-btn"
+							>
+								<HomeIcon fontSize="large" />
+							</Link>
+						</div>
+						{/* <div className="searchbox_block">
+							<SearchIcon className="searchbox_icon" />
+							<input type="text" placeholder="開始搜尋" 
+								className="searchbox_input"
+								onKeyDown={this._handleKeyDown}
+							/>
+						</div> */}
+						<Overview setData={this.setData} click={click} />
+						<Type setData={this.setData} click={click} />
+					</List>
+				</Drawer>
+				<div style={{ marginLeft: "400px", marginBottom: "100px" }}>
+					{ (tab === 0)  && <OverviewContent /> }
+					{ (tab === 1)  && <TypeContent /> }
+				</div>
+			</div>
+		)
+	}
+}
+

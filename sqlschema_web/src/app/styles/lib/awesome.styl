@@ -1,0 +1,129 @@
+dflex($direction = 0,$center = 0)
+    display flex
+    min-height: 0
+    min-width: 0
+    if $direction == 1
+        flex-direction column
+    if $center == 1
+        align-items center
+        justify-content center
+    else if $center == 2
+        align-items flex-start
+shadow($left = 0px,$top = 0px,$blur = 0px,$alpha = .2)
+    box-shadow $left $top $blur rgba(0,0,0,$alpha)
+nowarp()
+    white-space nowrap
+    text-overflow ellipsis
+    overflow-x hidden
+warp()
+    word-wrap break-word
+    word-break break-all
+    white-space normal
+clearinput()
+    outline none
+    border none
+overflow-scroll()
+    overflow-y auto
+    overflow-x hidden
+header-gap($h)
+    box-sizing border-box
+    padding-top $h
+boxpadding($gap)
+    box-sizing border-box
+    padding $gap
+cover()
+    background-size cover
+    background-position center
+    background-repeat no-repeat
+    background-color #E2E2F1
+vert($p)
+    vertical-align $p
+    display inline-block
+clearhref()
+    color #000
+    text-decoration none
+profile-img($size = 60px)
+    width $size
+    height $size
+    border-radius 100%
+    border solid 1px rgba(0,0,0,.2)
+media($device)
+    if $device == 'fullscreen'
+        @media screen and (min-width: 1200px)
+            {block}
+    else if $device == 'screen'
+        @media screen and (min-width: 768px) and (max-width: 979px)
+            {block}
+    else if $device == 'table'
+        @media screen and (max-width: 767px)
+            {block}
+    else
+        @media screen and (max-width: 340px)
+            {block}
+auto-grid($col = 1,$mar = .5%)
+    margin $mar
+    width (100% / $col) - ($mar * 2)
+size($w = 100%,$h = -1)
+    if $h == -1
+        $h = $w
+    width $w
+    height $h
+helf-page($size,$p = -1)
+    if $p == -1
+        width $size
+    else
+        width 100% - $size
+    min-height 50px
+    vert(top)
+self-mid()
+    &:before
+        content ''
+        size(0,100%)
+        vert(middle)
+self-mid2()
+    &:after
+        content ''
+        size(0,100%)
+        vert(middle)
+mask($from,$to)
+    position relative
+    &:after
+        content ''
+        position absolute
+        left 0
+        top 0
+        display block
+        background -moz-linear-gradient(top,$from 0%,$to 100%)
+        background -webkit-gradient(linear,left top,left bottom,color-stop(0%,$from),color-stop(100%,$to))
+        background -webkit-linear-gradient(top,$from 0%,$to 100%)
+        background -o-linear-gradient(top,$from 0%,$to 100%)
+        background -ms-linear-gradient(top,$from 0%,$to 100%)
+        background linear-gradient(to bottom,$from 0%,$to 100%)
+        width 100%
+        height 100%
+mask-slash($bg-color,$line-width)
+    position relative
+    &:after
+        content ''
+        position absolute
+        z-index 2
+        left 0
+        top 0
+        display block
+        width 100%
+        height 100%
+        background-color $bg-color
+        background-size $line-width $line-width
+        background-image linear-gradient(-95deg,rgba(255,255,255,.2) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.2) 50%,rgba(255,255,255,.2) 75%,transparent 75%,transparent)
+        background-image -webkit-linear-gradient(-95deg,rgba(255,255,255,.2) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.2) 50%,rgba(255,255,255,.2) 75%,transparent 75%,transparent)
+button($bg-color,$color =#fff,$bd-r=7px,$amount=20%)
+    clearinput()
+    cursor pointer
+    transition: .5s
+    border-radius: $bd-r
+    background-color $bg-color
+    color: $color
+    &:hover
+       background-color darken( $bg-color,$amount)
+       color: $color
+        
